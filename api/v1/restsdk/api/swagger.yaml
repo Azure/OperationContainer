@@ -1,0 +1,275 @@
+openapi: 3.0.1
+info:
+  title: operationcontainer.proto
+  version: version not set
+servers:
+- url: /
+tags:
+- name: OperationContainer
+paths:
+  /v1/entity:
+    get:
+      tags:
+      - OperationContainer
+      summary: Get the entity for a specific operation.
+      description: This operation will get the entity that is being targeted by a
+        specific operation.
+      operationId: OperationContainer_GetOperationEntity
+      parameters:
+      - name: EntityId
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: EntityType
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationContainerGetOperationEntityResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+  /v1/hello:
+    post:
+      tags:
+      - OperationContainer
+      summary: Send a greeting
+      description: This operation sends a greeting to the user.
+      operationId: OperationContainer_SayHello
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationContainerHelloRequest'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationContainerHelloReply'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+  /v1/operation/{operationId}:
+    get:
+      tags:
+      - OperationContainer
+      summary: Get Operation Status
+      description: This operation gets the operation status.
+      operationId: OperationContainer_GetOperationStatus
+      parameters:
+      - name: operationId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationContainerGetOperationStatusResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+    put:
+      tags:
+      - OperationContainer
+      summary: Update Operation Status
+      description: This operation updates the operation status.
+      operationId: OperationContainer_UpdateOperationStatus
+      parameters:
+      - name: operationId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationContainerUpdateOperationStatusBody'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                type: object
+                x-content-type: application/json
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - OperationContainer
+      summary: Create a new Operation Status
+      description: This operation creates a new operation status.
+      operationId: OperationContainer_CreateOperationStatus
+      parameters:
+      - name: operationId
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OperationContainerCreateOperationStatusBody'
+        required: true
+      responses:
+        "200":
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationContainerCreateOperationStatusResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    OperationContainerAddress:
+      type: object
+      properties:
+        city:
+          title: The city name
+          type: string
+        state:
+          title: The state name
+          type: string
+        zipcode:
+          title: The zip code
+          type: integer
+          format: int32
+        street:
+          title: The street name
+          type: string
+    OperationContainerCreateOperationStatusBody:
+      type: object
+      properties:
+        operationName:
+          type: string
+        entityId:
+          type: string
+        entityType:
+          type: string
+        expirationTimestamp:
+          type: string
+          format: date-time
+    OperationContainerCreateOperationStatusResponse:
+      type: object
+      properties:
+        operationId:
+          type: string
+      example:
+        operationId: operationId
+    OperationContainerGetOperationEntityResponse:
+      type: object
+      properties:
+        LastOperationId:
+          type: string
+      example:
+        LastOperationId: LastOperationId
+    OperationContainerGetOperationStatusResponse:
+      type: object
+      properties:
+        goalState:
+          $ref: '#/components/schemas/OperationContainerGoalState'
+      example:
+        goalState: UNKNOWN
+    OperationContainerGoalState:
+      type: string
+      default: UNKNOWN
+      enum:
+      - UNKNOWN
+      - PENDING
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      - CANCELLED
+    OperationContainerHelloReply:
+      type: object
+      properties:
+        message:
+          type: string
+      example:
+        message: message
+    OperationContainerHelloRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+          format: int32
+        email:
+          type: string
+        address:
+          $ref: '#/components/schemas/OperationContainerAddress'
+    OperationContainerUpdateOperationStatusBody:
+      type: object
+      properties:
+        goalState:
+          $ref: '#/components/schemas/OperationContainerGoalState'
+    protobufAny:
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties:
+        type: object
+      x-schema-name: protobufAny
+    rpcStatus:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+x-original-swagger-version: "2.0"

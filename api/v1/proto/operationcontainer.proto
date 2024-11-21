@@ -1,0 +1,147 @@
+syntax = "proto3";
+
+package OperationContainer;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "buf/validate/validate.proto";
+import "proto/log.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+// https://protobuf.dev/reference/go/go-generated/#package
+option go_package = "github.com/Azure/OperationContainer";
+
+// More info on how to use REST api
+// https://cloud.google.com/endpoints/docs/grpc/transcoding#map_a_get_method
+
+// The greeting service definition.
+service OperationContainer {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      post: "/v1/hello"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Send a greeting"
+      description: "This operation sends a greeting to the user."
+    };
+  }
+
+  // Creates a new operation status in the database.
+  rpc CreateOperationStatus (CreateOperationStatusRequest) returns (CreateOperationStatusResponse) {
+    option (google.api.http) = {
+      post: "/v1/operation/{operationId}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Create a new Operation Status"
+      description: "This operation creates a new operation status."
+    };
+  }
+
+  // Gets the status of an operation.
+  rpc GetOperationStatus (GetOperationStatusRequest) returns (GetOperationStatusResponse) {
+    option (google.api.http) = {
+      get: "/v1/operation/{operationId}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get Operation Status"
+      description: "This operation gets the operation status."
+    };
+  }
+
+  // Updates the status of an operation.
+  rpc UpdateOperationStatus (UpdateOperationStatusRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/v1/operation/{operationId}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Update Operation Status"
+      description: "This operation updates the operation status."
+    };
+  }
+
+  // Retrives an entity.
+  rpc GetOperationEntity (GetOperationEntityRequest) returns (GetOperationEntityResponse) {
+    option (google.api.http) = {
+      get: "/v1/entity"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      summary: "Get the entity for a specific operation."
+      description: "This operation will get the entity that is being targeted by a specific operation."
+    };
+  }
+}
+
+message HelloRequest {
+  string name = 1 [(buf.validate.field).string.min_len = 2]; 
+  int32 age = 2 [(buf.validate.field).int32 = {
+    gte: 1,
+    lt: 150
+  }, (fieldoptions.loggable) = false]; 
+  string email = 3 [(buf.validate.field).string = {
+    min_len: 1,
+    pattern: "^[\\w.-]+@[\\w.-]+\\.[\\w]{2,}$"
+  }, (fieldoptions.loggable) = false]; 
+  optional Address address = 4;
+}
+
+message HelloReply {
+  string message = 1; 
+}
+
+message Address {
+  string city = 1 [(buf.validate.field).string.min_len = 1]; // The city name
+  string state = 2 [(buf.validate.field).string.min_len = 1, (fieldoptions.loggable) = false]; // The state name
+  int32 zipcode = 3 [(buf.validate.field).int32 = {
+    gte: 10000,
+    lt: 99999
+  }]; // The zip code
+  string street = 4 [(buf.validate.field).string.min_len = 1, (fieldoptions.loggable) = false]; // The street name
+}
+
+message CreateOperationStatusRequest {
+  string operationName = 1;
+  string entityId = 2;
+  string entityType = 3;
+  google.protobuf.Timestamp expirationTimestamp = 4;
+  string operationId = 5;
+}
+
+message CreateOperationStatusResponse {
+  string operationId = 1;
+}
+
+message UpdateOperationStatusRequest {
+  string operationId = 1;
+  GoalState goalState = 2;
+}
+
+message GetOperationStatusRequest {
+  string operationId = 1;
+}
+
+message GetOperationStatusResponse {
+  GoalState goalState = 1;
+}
+
+message GetOperationEntityRequest {
+  string EntityId = 1;
+  string EntityType = 2;
+}
+
+message GetOperationEntityResponse {
+  string LastOperationId = 1;
+}
+
+enum GoalState {
+  UNKNOWN = 0;
+  PENDING = 1;
+  IN_PROGRESS = 2;
+  COMPLETED = 3;
+  FAILED = 4;
+  CANCELLED = 5;
+}

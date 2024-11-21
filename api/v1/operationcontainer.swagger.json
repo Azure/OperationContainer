@@ -1,0 +1,341 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "operationcontainer.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "OperationContainer"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/entity": {
+      "get": {
+        "summary": "Get the entity for a specific operation.",
+        "description": "This operation will get the entity that is being targeted by a specific operation.",
+        "operationId": "OperationContainer_GetOperationEntity",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/OperationContainerGetOperationEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "EntityId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "EntityType",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OperationContainer"
+        ]
+      }
+    },
+    "/v1/hello": {
+      "post": {
+        "summary": "Send a greeting",
+        "description": "This operation sends a greeting to the user.",
+        "operationId": "OperationContainer_SayHello",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/OperationContainerHelloReply"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationContainerHelloRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OperationContainer"
+        ]
+      }
+    },
+    "/v1/operation/{operationId}": {
+      "get": {
+        "summary": "Get Operation Status",
+        "description": "This operation gets the operation status.",
+        "operationId": "OperationContainer_GetOperationStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/OperationContainerGetOperationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OperationContainer"
+        ]
+      },
+      "post": {
+        "summary": "Create a new Operation Status",
+        "description": "This operation creates a new operation status.",
+        "operationId": "OperationContainer_CreateOperationStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/OperationContainerCreateOperationStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationContainerCreateOperationStatusBody"
+            }
+          }
+        ],
+        "tags": [
+          "OperationContainer"
+        ]
+      },
+      "put": {
+        "summary": "Update Operation Status",
+        "description": "This operation updates the operation status.",
+        "operationId": "OperationContainer_UpdateOperationStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OperationContainerUpdateOperationStatusBody"
+            }
+          }
+        ],
+        "tags": [
+          "OperationContainer"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "OperationContainerAddress": {
+      "type": "object",
+      "properties": {
+        "city": {
+          "type": "string",
+          "title": "The city name"
+        },
+        "state": {
+          "type": "string",
+          "title": "The state name"
+        },
+        "zipcode": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The zip code"
+        },
+        "street": {
+          "type": "string",
+          "title": "The street name"
+        }
+      }
+    },
+    "OperationContainerCreateOperationStatusBody": {
+      "type": "object",
+      "properties": {
+        "operationName": {
+          "type": "string"
+        },
+        "entityId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "OperationContainerCreateOperationStatusResponse": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationContainerGetOperationEntityResponse": {
+      "type": "object",
+      "properties": {
+        "LastOperationId": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationContainerGetOperationStatusResponse": {
+      "type": "object",
+      "properties": {
+        "goalState": {
+          "$ref": "#/definitions/OperationContainerGoalState"
+        }
+      }
+    },
+    "OperationContainerGoalState": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PENDING",
+        "IN_PROGRESS",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "default": "UNKNOWN"
+    },
+    "OperationContainerHelloReply": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationContainerHelloRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "$ref": "#/definitions/OperationContainerAddress"
+        }
+      }
+    },
+    "OperationContainerUpdateOperationStatusBody": {
+      "type": "object",
+      "properties": {
+        "goalState": {
+          "$ref": "#/definitions/OperationContainerGoalState"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
