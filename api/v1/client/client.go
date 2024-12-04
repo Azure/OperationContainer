@@ -1,7 +1,7 @@
 package client
 
 import (
-	pb "github.com/Azure/OperationContainer"
+	pb "github.com/Azure/OperationContainer/api/v1"
 	"github.com/Azure/aks-middleware/interceptor"
 
 	log "log/slog"
