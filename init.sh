@@ -2,7 +2,7 @@
 
 # For the api.
 cd api
-go mod init github.com/Azure/OperationContainer
+go mod init github.com/Azure/OperationContainer/api
 go mod edit -require github.com/Azure/aks-middleware@v0.0.23
 go get google.golang.org/genproto@latest
 cd ..
