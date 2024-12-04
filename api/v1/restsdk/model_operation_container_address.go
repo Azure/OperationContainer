@@ -9,8 +9,8 @@
 package restsdk
 
 type OperationContainerAddress struct {
-	City string `json:"city,omitempty"`
-	State string `json:"state,omitempty"`
-	Zipcode int32 `json:"zipcode,omitempty"`
-	Street string `json:"street,omitempty"`
+	City    string `json:"city,omitempty"`
+	State   string `json:"state,omitempty"`
+	Zipcode int32  `json:"zipcode,omitempty"`
+	Street  string `json:"street,omitempty"`
 }

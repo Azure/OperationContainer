@@ -9,8 +9,8 @@
 package restsdk
 
 type OperationContainerHelloRequest struct {
-	Name string `json:"name,omitempty"`
-	Age int32 `json:"age,omitempty"`
-	Email string `json:"email,omitempty"`
+	Name    string                     `json:"name,omitempty"`
+	Age     int32                      `json:"age,omitempty"`
+	Email   string                     `json:"email,omitempty"`
 	Address *OperationContainerAddress `json:"address,omitempty"`
 }

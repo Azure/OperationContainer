@@ -10,7 +10,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/protobuf/timestamp.proto";
 
 // https://protobuf.dev/reference/go/go-generated/#package
-option go_package = "github.com/Azure/OperationContainer";
+option go_package = "github.com/Azure/OperationContainer/api";
 
 // More info on how to use REST api
 // https://cloud.google.com/endpoints/docs/grpc/transcoding#map_a_get_method

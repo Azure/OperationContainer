@@ -23,5 +23,5 @@ service:
 	go mod tidy # Update go.mod after code generation.
 	go get go.uber.org/mock/mockgen/model # Required by mockgen.
 	${HOME}/go/bin/mockgen -package mock \
-		github.com/Azure/OperationContainer \
+		github.com/Azure/OperationContainer/api/v1 \
 		OperationContainerClient > mock/mock_client.go

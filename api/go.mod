@@ -25,6 +25,8 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware/v2 v2.0.1 // indirect
 	github.com/rogpeppe/go-internal v1.13.1 // indirect
 	github.com/stoewer/go-strcase v1.3.0 // indirect
+	github.com/stretchr/testify v1.9.0 // indirect
+	go.uber.org/mock v0.5.0 // indirect
 	golang.org/x/exp v0.0.0-20230905200255-921286631fa9 // indirect
 	golang.org/x/net v0.30.0 // indirect
 	golang.org/x/sys v0.26.0 // indirect
@@ -37,5 +39,4 @@ require (
 require (
 	github.com/Azure/aks-middleware v0.0.23
 	github.com/google/go-cmp v0.6.0 // indirect
-	go.uber.org/mock v0.5.0
 )
