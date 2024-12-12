@@ -16,78 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/v1/entity": {
-      "get": {
-        "summary": "Get the entity for a specific operation.",
-        "description": "This operation will get the entity that is being targeted by a specific operation.",
-        "operationId": "OperationContainer_GetOperationEntity",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/OperationContainerGetOperationEntityResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "EntityId",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "EntityType",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "OperationContainer"
-        ]
-      }
-    },
-    "/v1/hello": {
-      "post": {
-        "summary": "Send a greeting",
-        "description": "This operation sends a greeting to the user.",
-        "operationId": "OperationContainer_SayHello",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/OperationContainerHelloReply"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/OperationContainerHelloRequest"
-            }
-          }
-        ],
-        "tags": [
-          "OperationContainer"
-        ]
-      }
-    },
     "/v1/operation/{operationId}": {
       "get": {
         "summary": "Get Operation Status",
@@ -127,7 +55,8 @@
           "200": {
             "description": "A successful response.",
             "schema": {
-              "$ref": "#/definitions/OperationContainerCreateOperationStatusResponse"
+              "type": "object",
+              "properties": {}
             }
           },
           "default": {
@@ -199,28 +128,6 @@
     }
   },
   "definitions": {
-    "OperationContainerAddress": {
-      "type": "object",
-      "properties": {
-        "city": {
-          "type": "string",
-          "title": "The city name"
-        },
-        "state": {
-          "type": "string",
-          "title": "The state name"
-        },
-        "zipcode": {
-          "type": "integer",
-          "format": "int32",
-          "title": "The zip code"
-        },
-        "street": {
-          "type": "string",
-          "title": "The street name"
-        }
-      }
-    },
     "OperationContainerCreateOperationStatusBody": {
       "type": "object",
       "properties": {
@@ -236,22 +143,6 @@
         "expirationTimestamp": {
           "type": "string",
           "format": "date-time"
-        }
-      }
-    },
-    "OperationContainerCreateOperationStatusResponse": {
-      "type": "object",
-      "properties": {
-        "operationId": {
-          "type": "string"
-        }
-      }
-    },
-    "OperationContainerGetOperationEntityResponse": {
-      "type": "object",
-      "properties": {
-        "LastOperationId": {
-          "type": "string"
         }
       }
     },
@@ -274,32 +165,6 @@
         "CANCELLED"
       ],
       "default": "UNKNOWN"
-    },
-    "OperationContainerHelloReply": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string"
-        }
-      }
-    },
-    "OperationContainerHelloRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "age": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "email": {
-          "type": "string"
-        },
-        "address": {
-          "$ref": "#/definitions/OperationContainerAddress"
-        }
-      }
     },
     "OperationContainerUpdateOperationStatusBody": {
       "type": "object",

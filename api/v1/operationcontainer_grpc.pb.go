@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: operationcontainer.proto
 
-package v1
+package OperationContainer
 
 import (
 	context "context"
@@ -20,11 +20,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OperationContainer_SayHello_FullMethodName              = "/OperationContainer.OperationContainer/SayHello"
 	OperationContainer_CreateOperationStatus_FullMethodName = "/OperationContainer.OperationContainer/CreateOperationStatus"
 	OperationContainer_GetOperationStatus_FullMethodName    = "/OperationContainer.OperationContainer/GetOperationStatus"
 	OperationContainer_UpdateOperationStatus_FullMethodName = "/OperationContainer.OperationContainer/UpdateOperationStatus"
-	OperationContainer_GetOperationEntity_FullMethodName    = "/OperationContainer.OperationContainer/GetOperationEntity"
 )
 
 // OperationContainerClient is the client API for OperationContainer service.
@@ -33,16 +31,12 @@ const (
 //
 // The greeting service definition.
 type OperationContainerClient interface {
-	// Sends a greeting
-	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error)
 	// Creates a new operation status in the database.
-	CreateOperationStatus(ctx context.Context, in *CreateOperationStatusRequest, opts ...grpc.CallOption) (*CreateOperationStatusResponse, error)
+	CreateOperationStatus(ctx context.Context, in *CreateOperationStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Gets the status of an operation.
 	GetOperationStatus(ctx context.Context, in *GetOperationStatusRequest, opts ...grpc.CallOption) (*GetOperationStatusResponse, error)
 	// Updates the status of an operation.
 	UpdateOperationStatus(ctx context.Context, in *UpdateOperationStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Retrives an entity.
-	GetOperationEntity(ctx context.Context, in *GetOperationEntityRequest, opts ...grpc.CallOption) (*GetOperationEntityResponse, error)
 }
 
 type operationContainerClient struct {
@@ -53,19 +47,9 @@ func NewOperationContainerClient(cc grpc.ClientConnInterface) OperationContainer
 	return &operationContainerClient{cc}
 }
 
-func (c *operationContainerClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloReply, error) {
+func (c *operationContainerClient) CreateOperationStatus(ctx context.Context, in *CreateOperationStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(HelloReply)
-	err := c.cc.Invoke(ctx, OperationContainer_SayHello_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *operationContainerClient) CreateOperationStatus(ctx context.Context, in *CreateOperationStatusRequest, opts ...grpc.CallOption) (*CreateOperationStatusResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateOperationStatusResponse)
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, OperationContainer_CreateOperationStatus_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -93,32 +77,18 @@ func (c *operationContainerClient) UpdateOperationStatus(ctx context.Context, in
 	return out, nil
 }
 
-func (c *operationContainerClient) GetOperationEntity(ctx context.Context, in *GetOperationEntityRequest, opts ...grpc.CallOption) (*GetOperationEntityResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOperationEntityResponse)
-	err := c.cc.Invoke(ctx, OperationContainer_GetOperationEntity_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // OperationContainerServer is the server API for OperationContainer service.
 // All implementations must embed UnimplementedOperationContainerServer
 // for forward compatibility.
 //
 // The greeting service definition.
 type OperationContainerServer interface {
-	// Sends a greeting
-	SayHello(context.Context, *HelloRequest) (*HelloReply, error)
 	// Creates a new operation status in the database.
-	CreateOperationStatus(context.Context, *CreateOperationStatusRequest) (*CreateOperationStatusResponse, error)
+	CreateOperationStatus(context.Context, *CreateOperationStatusRequest) (*emptypb.Empty, error)
 	// Gets the status of an operation.
 	GetOperationStatus(context.Context, *GetOperationStatusRequest) (*GetOperationStatusResponse, error)
 	// Updates the status of an operation.
 	UpdateOperationStatus(context.Context, *UpdateOperationStatusRequest) (*emptypb.Empty, error)
-	// Retrives an entity.
-	GetOperationEntity(context.Context, *GetOperationEntityRequest) (*GetOperationEntityResponse, error)
 	mustEmbedUnimplementedOperationContainerServer()
 }
 
@@ -129,10 +99,7 @@ type OperationContainerServer interface {
 // pointer dereference when methods are called.
 type UnimplementedOperationContainerServer struct{}
 
-func (UnimplementedOperationContainerServer) SayHello(context.Context, *HelloRequest) (*HelloReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
-}
-func (UnimplementedOperationContainerServer) CreateOperationStatus(context.Context, *CreateOperationStatusRequest) (*CreateOperationStatusResponse, error) {
+func (UnimplementedOperationContainerServer) CreateOperationStatus(context.Context, *CreateOperationStatusRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOperationStatus not implemented")
 }
 func (UnimplementedOperationContainerServer) GetOperationStatus(context.Context, *GetOperationStatusRequest) (*GetOperationStatusResponse, error) {
@@ -140,9 +107,6 @@ func (UnimplementedOperationContainerServer) GetOperationStatus(context.Context,
 }
 func (UnimplementedOperationContainerServer) UpdateOperationStatus(context.Context, *UpdateOperationStatusRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOperationStatus not implemented")
-}
-func (UnimplementedOperationContainerServer) GetOperationEntity(context.Context, *GetOperationEntityRequest) (*GetOperationEntityResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOperationEntity not implemented")
 }
 func (UnimplementedOperationContainerServer) mustEmbedUnimplementedOperationContainerServer() {}
 func (UnimplementedOperationContainerServer) testEmbeddedByValue()                            {}
@@ -163,24 +127,6 @@ func RegisterOperationContainerServer(s grpc.ServiceRegistrar, srv OperationCont
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&OperationContainer_ServiceDesc, srv)
-}
-
-func _OperationContainer_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(HelloRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperationContainerServer).SayHello(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OperationContainer_SayHello_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperationContainerServer).SayHello(ctx, req.(*HelloRequest))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _OperationContainer_CreateOperationStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -237,24 +183,6 @@ func _OperationContainer_UpdateOperationStatus_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OperationContainer_GetOperationEntity_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOperationEntityRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OperationContainerServer).GetOperationEntity(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: OperationContainer_GetOperationEntity_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperationContainerServer).GetOperationEntity(ctx, req.(*GetOperationEntityRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // OperationContainer_ServiceDesc is the grpc.ServiceDesc for OperationContainer service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -262,10 +190,6 @@ var OperationContainer_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "OperationContainer.OperationContainer",
 	HandlerType: (*OperationContainerServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "SayHello",
-			Handler:    _OperationContainer_SayHello_Handler,
-		},
 		{
 			MethodName: "CreateOperationStatus",
 			Handler:    _OperationContainer_CreateOperationStatus_Handler,
@@ -277,10 +201,6 @@ var OperationContainer_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateOperationStatus",
 			Handler:    _OperationContainer_UpdateOperationStatus_Handler,
-		},
-		{
-			MethodName: "GetOperationEntity",
-			Handler:    _OperationContainer_GetOperationEntity_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

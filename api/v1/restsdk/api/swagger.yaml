@@ -7,69 +7,6 @@ servers:
 tags:
 - name: OperationContainer
 paths:
-  /v1/entity:
-    get:
-      tags:
-      - OperationContainer
-      summary: Get the entity for a specific operation.
-      description: This operation will get the entity that is being targeted by a
-        specific operation.
-      operationId: OperationContainer_GetOperationEntity
-      parameters:
-      - name: EntityId
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: EntityType
-        in: query
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OperationContainerGetOperationEntityResponse'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-  /v1/hello:
-    post:
-      tags:
-      - OperationContainer
-      summary: Send a greeting
-      description: This operation sends a greeting to the user.
-      operationId: OperationContainer_SayHello
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OperationContainerHelloRequest'
-        required: true
-      responses:
-        "200":
-          description: A successful response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OperationContainerHelloReply'
-        default:
-          description: An unexpected error response.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/rpcStatus'
-      x-codegen-request-body-name: body
   /v1/operation/{operationId}:
     get:
       tags:
@@ -159,7 +96,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OperationContainerCreateOperationStatusResponse'
+                type: object
+                x-content-type: application/json
         default:
           description: An unexpected error response.
           content:
@@ -169,22 +107,6 @@ paths:
       x-codegen-request-body-name: body
 components:
   schemas:
-    OperationContainerAddress:
-      type: object
-      properties:
-        city:
-          title: The city name
-          type: string
-        state:
-          title: The state name
-          type: string
-        zipcode:
-          title: The zip code
-          type: integer
-          format: int32
-        street:
-          title: The street name
-          type: string
     OperationContainerCreateOperationStatusBody:
       type: object
       properties:
@@ -197,20 +119,6 @@ components:
         expirationTimestamp:
           type: string
           format: date-time
-    OperationContainerCreateOperationStatusResponse:
-      type: object
-      properties:
-        operationId:
-          type: string
-      example:
-        operationId: operationId
-    OperationContainerGetOperationEntityResponse:
-      type: object
-      properties:
-        LastOperationId:
-          type: string
-      example:
-        LastOperationId: LastOperationId
     OperationContainerGetOperationStatusResponse:
       type: object
       properties:
@@ -228,25 +136,6 @@ components:
       - COMPLETED
       - FAILED
       - CANCELLED
-    OperationContainerHelloReply:
-      type: object
-      properties:
-        message:
-          type: string
-      example:
-        message: message
-    OperationContainerHelloRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        age:
-          type: integer
-          format: int32
-        email:
-          type: string
-        address:
-          $ref: '#/components/schemas/OperationContainerAddress'
     OperationContainerUpdateOperationStatusBody:
       type: object
       properties:

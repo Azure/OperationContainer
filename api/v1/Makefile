@@ -5,6 +5,7 @@ BUF_TOKEN := $(shell echo $(BUF_TOKEN))
 
 # api.swagger.json file is automatically generated using npx buf generate command via the openapi plugin
 service:
+	docker build -t build-operationcontainer .
 	docker run --mount src=$(MAIN_DIR),target=/app/binded-data,type=bind \
 		-e BUF_TOKEN=$(BUF_TOKEN) \
 		-d build-operationcontainer \
@@ -12,10 +13,7 @@ service:
 	"cd binded-data/OperationContainer/api/v1; \
 	cd proto; buf mod update; cd ..; buf generate; \
 	swagger-codegen-cli generate -i operationcontainer.swagger.json -l go -o restsdk -c swagger-config.json; \
-	chown -R $(USER_ID) ../..; \
-	cd /app; ./maintain_service populateMethodFiles \
-		--protoFilePath binded-data/OperationContainer/api/v1/proto/operationcontainer.proto \
-		--svcDirName binded-data/OperationContainer --deleteGarbageFiles=false;"
+	chown -R $(USER_ID) ../..;"
 
 	# go mod related work is done outside the docker container 
 	# to avoid repeated download in the docker container

@@ -22,21 +22,14 @@ All URIs are relative to */*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *OperationContainerApi* | [**OperationContainerCreateOperationStatus**](docs/OperationContainerApi.md#operationcontainercreateoperationstatus) | **Post** /v1/operation/{operationId} | Create a new Operation Status
-*OperationContainerApi* | [**OperationContainerGetOperationEntity**](docs/OperationContainerApi.md#operationcontainergetoperationentity) | **Get** /v1/entity | Get the entity for a specific operation.
 *OperationContainerApi* | [**OperationContainerGetOperationStatus**](docs/OperationContainerApi.md#operationcontainergetoperationstatus) | **Get** /v1/operation/{operationId} | Get Operation Status
-*OperationContainerApi* | [**OperationContainerSayHello**](docs/OperationContainerApi.md#operationcontainersayhello) | **Post** /v1/hello | Send a greeting
 *OperationContainerApi* | [**OperationContainerUpdateOperationStatus**](docs/OperationContainerApi.md#operationcontainerupdateoperationstatus) | **Put** /v1/operation/{operationId} | Update Operation Status
 
 ## Documentation For Models
 
- - [OperationContainerAddress](docs/OperationContainerAddress.md)
  - [OperationContainerCreateOperationStatusBody](docs/OperationContainerCreateOperationStatusBody.md)
- - [OperationContainerCreateOperationStatusResponse](docs/OperationContainerCreateOperationStatusResponse.md)
- - [OperationContainerGetOperationEntityResponse](docs/OperationContainerGetOperationEntityResponse.md)
  - [OperationContainerGetOperationStatusResponse](docs/OperationContainerGetOperationStatusResponse.md)
  - [OperationContainerGoalState](docs/OperationContainerGoalState.md)
- - [OperationContainerHelloReply](docs/OperationContainerHelloReply.md)
- - [OperationContainerHelloRequest](docs/OperationContainerHelloRequest.md)
  - [OperationContainerUpdateOperationStatusBody](docs/OperationContainerUpdateOperationStatusBody.md)
  - [RpcStatus](docs/RpcStatus.md)
 
