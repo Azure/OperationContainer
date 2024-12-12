@@ -2,13 +2,16 @@ all: service
 MAIN_DIR := $(shell dirname -- $(shell dirname -- $(shell dirname -- $(shell pwd))))
 USER_ID := $(shell id -u):$(shell id -g)
 BUF_TOKEN := $(shell echo $(BUF_TOKEN))
+REGISTRY_NAME=servicehubregistry
+IMG_NAME=service_hub_environment
+IMG_DATE_TAG=20240912
 
 # api.swagger.json file is automatically generated using npx buf generate command via the openapi plugin
 service:
-	docker build -t build-operationcontainer .
+	# docker build -t build-operationcontainer .
 	docker run --mount src=$(MAIN_DIR),target=/app/binded-data,type=bind \
 		-e BUF_TOKEN=$(BUF_TOKEN) \
-		-d build-operationcontainer \
+		$(REGISTRY_NAME).azurecr.io/$(IMG_NAME):$(IMG_DATE_TAG) \
 		/bin/bash -c \
 	"cd binded-data/OperationContainer/api/v1; \
 	cd proto; buf mod update; cd ..; buf generate; \

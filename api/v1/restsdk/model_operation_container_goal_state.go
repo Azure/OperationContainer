@@ -12,10 +12,10 @@ type OperationContainerGoalState string
 
 // List of OperationContainerGoalState
 const (
-	UNKNOWN_OperationContainerGoalState OperationContainerGoalState = "UNKNOWN"
-	PENDING_OperationContainerGoalState OperationContainerGoalState = "PENDING"
+	UNKNOWN_OperationContainerGoalState     OperationContainerGoalState = "UNKNOWN"
+	PENDING_OperationContainerGoalState     OperationContainerGoalState = "PENDING"
 	IN_PROGRESS_OperationContainerGoalState OperationContainerGoalState = "IN_PROGRESS"
-	COMPLETED_OperationContainerGoalState OperationContainerGoalState = "COMPLETED"
-	FAILED_OperationContainerGoalState OperationContainerGoalState = "FAILED"
-	CANCELLED_OperationContainerGoalState OperationContainerGoalState = "CANCELLED"
+	COMPLETED_OperationContainerGoalState   OperationContainerGoalState = "COMPLETED"
+	FAILED_OperationContainerGoalState      OperationContainerGoalState = "FAILED"
+	CANCELLED_OperationContainerGoalState   OperationContainerGoalState = "CANCELLED"
 )

@@ -10,7 +10,6 @@ package OperationContainer
 
 import (
 	"context"
-	"errors"
 	"io"
 	"net/http"
 
@@ -25,134 +24,183 @@ import (
 )
 
 // Suppress "imported and not used" errors
-var (
-	_ codes.Code
-	_ io.Reader
-	_ status.Status
-	_ = errors.New
-	_ = runtime.String
-	_ = utilities.NewDoubleArray
-	_ = metadata.Join
-)
+var _ codes.Code
+var _ io.Reader
+var _ status.Status
+var _ = runtime.String
+var _ = utilities.NewDoubleArray
+var _ = metadata.Join
 
 func request_OperationContainer_CreateOperationStatus_0(ctx context.Context, marshaler runtime.Marshaler, client OperationContainerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq CreateOperationStatusRequest
-		metadata runtime.ServerMetadata
-		err      error
-	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	var protoReq CreateOperationStatusRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["operationId"]
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["operationId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operationId")
 	}
+
 	protoReq.OperationId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operationId", err)
 	}
+
 	msg, err := client.CreateOperationStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
+
 }
 
 func local_request_OperationContainer_CreateOperationStatus_0(ctx context.Context, marshaler runtime.Marshaler, server OperationContainerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq CreateOperationStatusRequest
-		metadata runtime.ServerMetadata
-		err      error
-	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	var protoReq CreateOperationStatusRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["operationId"]
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["operationId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operationId")
 	}
+
 	protoReq.OperationId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operationId", err)
 	}
+
 	msg, err := server.CreateOperationStatus(ctx, &protoReq)
 	return msg, metadata, err
+
 }
 
 func request_OperationContainer_GetOperationStatus_0(ctx context.Context, marshaler runtime.Marshaler, client OperationContainerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetOperationStatusRequest
+	var metadata runtime.ServerMetadata
+
 	var (
-		protoReq GetOperationStatusRequest
-		metadata runtime.ServerMetadata
-		err      error
+		val string
+		ok  bool
+		err error
+		_   = err
 	)
-	val, ok := pathParams["operationId"]
+
+	val, ok = pathParams["operationId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operationId")
 	}
+
 	protoReq.OperationId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operationId", err)
 	}
+
 	msg, err := client.GetOperationStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
+
 }
 
 func local_request_OperationContainer_GetOperationStatus_0(ctx context.Context, marshaler runtime.Marshaler, server OperationContainerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetOperationStatusRequest
+	var metadata runtime.ServerMetadata
+
 	var (
-		protoReq GetOperationStatusRequest
-		metadata runtime.ServerMetadata
-		err      error
+		val string
+		ok  bool
+		err error
+		_   = err
 	)
-	val, ok := pathParams["operationId"]
+
+	val, ok = pathParams["operationId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operationId")
 	}
+
 	protoReq.OperationId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operationId", err)
 	}
+
 	msg, err := server.GetOperationStatus(ctx, &protoReq)
 	return msg, metadata, err
+
 }
 
 func request_OperationContainer_UpdateOperationStatus_0(ctx context.Context, marshaler runtime.Marshaler, client OperationContainerClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq UpdateOperationStatusRequest
-		metadata runtime.ServerMetadata
-		err      error
-	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	var protoReq UpdateOperationStatusRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["operationId"]
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["operationId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operationId")
 	}
+
 	protoReq.OperationId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operationId", err)
 	}
+
 	msg, err := client.UpdateOperationStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
+
 }
 
 func local_request_OperationContainer_UpdateOperationStatus_0(ctx context.Context, marshaler runtime.Marshaler, server OperationContainerServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq UpdateOperationStatusRequest
-		metadata runtime.ServerMetadata
-		err      error
-	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	var protoReq UpdateOperationStatusRequest
+	var metadata runtime.ServerMetadata
+
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["operationId"]
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["operationId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "operationId")
 	}
+
 	protoReq.OperationId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "operationId", err)
 	}
+
 	msg, err := server.UpdateOperationStatus(ctx, &protoReq)
 	return msg, metadata, err
+
 }
 
 // RegisterOperationContainerHandlerServer registers the http handlers for service OperationContainer to "mux".
@@ -161,13 +209,16 @@ func local_request_OperationContainer_UpdateOperationStatus_0(ctx context.Contex
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOperationContainerHandlerFromEndpoint instead.
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterOperationContainerHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OperationContainerServer) error {
-	mux.Handle(http.MethodPost, pattern_OperationContainer_CreateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+
+	mux.Handle("POST", pattern_OperationContainer_CreateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/OperationContainer.OperationContainer/CreateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/OperationContainer.OperationContainer/CreateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -179,15 +230,20 @@ func RegisterOperationContainerHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
+
 		forward_OperationContainer_CreateOperationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
-	mux.Handle(http.MethodGet, pattern_OperationContainer_GetOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+
+	mux.Handle("GET", pattern_OperationContainer_GetOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/OperationContainer.OperationContainer/GetOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/OperationContainer.OperationContainer/GetOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -199,15 +255,20 @@ func RegisterOperationContainerHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
+
 		forward_OperationContainer_GetOperationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
-	mux.Handle(http.MethodPut, pattern_OperationContainer_UpdateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+
+	mux.Handle("PUT", pattern_OperationContainer_UpdateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/OperationContainer.OperationContainer/UpdateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/OperationContainer.OperationContainer/UpdateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -219,7 +280,9 @@ func RegisterOperationContainerHandlerServer(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
+
 		forward_OperationContainer_UpdateOperationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
 
 	return nil
@@ -246,6 +309,7 @@ func RegisterOperationContainerHandlerFromEndpoint(ctx context.Context, mux *run
 			}
 		}()
 	}()
+
 	return RegisterOperationContainerHandler(ctx, mux, conn)
 }
 
@@ -261,11 +325,14 @@ func RegisterOperationContainerHandler(ctx context.Context, mux *runtime.ServeMu
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
 // "OperationContainerClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterOperationContainerHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OperationContainerClient) error {
-	mux.Handle(http.MethodPost, pattern_OperationContainer_CreateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+
+	mux.Handle("POST", pattern_OperationContainer_CreateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/OperationContainer.OperationContainer/CreateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/OperationContainer.OperationContainer/CreateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -276,13 +343,18 @@ func RegisterOperationContainerHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
+
 		forward_OperationContainer_CreateOperationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
-	mux.Handle(http.MethodGet, pattern_OperationContainer_GetOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+
+	mux.Handle("GET", pattern_OperationContainer_GetOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/OperationContainer.OperationContainer/GetOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/OperationContainer.OperationContainer/GetOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -293,13 +365,18 @@ func RegisterOperationContainerHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
+
 		forward_OperationContainer_GetOperationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
-	mux.Handle(http.MethodPut, pattern_OperationContainer_UpdateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+
+	mux.Handle("PUT", pattern_OperationContainer_UpdateOperationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/OperationContainer.OperationContainer/UpdateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/OperationContainer.OperationContainer/UpdateOperationStatus", runtime.WithHTTPPathPattern("/v1/operation/{operationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -310,19 +387,26 @@ func RegisterOperationContainerHandlerClient(ctx context.Context, mux *runtime.S
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
+
 		forward_OperationContainer_UpdateOperationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
+
 	return nil
 }
 
 var (
 	pattern_OperationContainer_CreateOperationStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "operation", "operationId"}, ""))
-	pattern_OperationContainer_GetOperationStatus_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "operation", "operationId"}, ""))
+
+	pattern_OperationContainer_GetOperationStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "operation", "operationId"}, ""))
+
 	pattern_OperationContainer_UpdateOperationStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "operation", "operationId"}, ""))
 )
 
 var (
 	forward_OperationContainer_CreateOperationStatus_0 = runtime.ForwardResponseMessage
-	forward_OperationContainer_GetOperationStatus_0    = runtime.ForwardResponseMessage
+
+	forward_OperationContainer_GetOperationStatus_0 = runtime.ForwardResponseMessage
+
 	forward_OperationContainer_UpdateOperationStatus_0 = runtime.ForwardResponseMessage
 )
