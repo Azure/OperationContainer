@@ -8,7 +8,6 @@ IMG_DATE_TAG=20240912
 
 # api.swagger.json file is automatically generated using npx buf generate command via the openapi plugin
 service:
-	# docker build -t build-operationcontainer .
 	docker run --mount src=$(MAIN_DIR),target=/app/binded-data,type=bind \
 		-e BUF_TOKEN=$(BUF_TOKEN) \
 		$(REGISTRY_NAME).azurecr.io/$(IMG_NAME):$(IMG_DATE_TAG) \
