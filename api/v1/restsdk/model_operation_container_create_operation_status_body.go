@@ -15,7 +15,5 @@ import (
 type OperationContainerCreateOperationStatusBody struct {
 	OperationName       string    `json:"operationName,omitempty"`
 	EntityId            string    `json:"entityId,omitempty"`
-	EntityType          string    `json:"entityType,omitempty"`
 	ExpirationTimestamp time.Time `json:"expirationTimestamp,omitempty"`
-	OperationId         string    `json:"operationId,omitempty"`
 }
