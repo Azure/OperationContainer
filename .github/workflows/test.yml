@@ -21,8 +21,7 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Enter repo
-      run: ls
-      # run: cd OperationContainer/api/v1
+      run: cd api/v1
 
     - name: Build
       run: go build ./...
