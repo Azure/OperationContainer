@@ -56,7 +56,6 @@ service OperationContainer {
 message CreateOperationStatusRequest {
   string operationName = 1;
   string entityId = 2;
-  string entityType = 3;
   google.protobuf.Timestamp expirationTimestamp = 4;
   string operationId = 5;
 }

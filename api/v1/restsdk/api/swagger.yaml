@@ -114,8 +114,6 @@ components:
           type: string
         entityId:
           type: string
-        entityType:
-          type: string
         expirationTimestamp:
           type: string
           format: date-time
