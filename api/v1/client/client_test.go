@@ -3,7 +3,7 @@ package client
 import (
 	log "log/slog"
 
-	"github.com/Azure/aks-middleware/interceptor"
+	"github.com/Azure/aks-middleware/grpc/interceptor"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
