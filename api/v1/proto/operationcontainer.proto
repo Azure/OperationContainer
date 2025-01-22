@@ -54,19 +54,19 @@ service OperationContainer {
 }
 
 message CreateOperationStatusRequest {
-  string operationName = 1;
-  string entityId = 2;
-  google.protobuf.Timestamp expirationTimestamp = 4;
-  string operationId = 5;
+  string operationName = 1 [(buf.validate.field).string.min_len = 1];
+  string entityId = 2 [(buf.validate.field).string.min_len = 1];
+  google.protobuf.Timestamp expirationTimestamp = 3 [(buf.validate.field).timestamp.gt_now = true];
+  string operationId = 4 [(buf.validate.field).string.min_len = 1];
 }
 
 message UpdateOperationStatusRequest {
-  string operationId = 1;
+  string operationId = 1 [(buf.validate.field).string.min_len = 1];
   Status status = 2;
 }
 
 message GetOperationStatusRequest {
-  string operationId = 1;
+  string operationId = 1 [(buf.validate.field).string.min_len = 1];
 }
 
 message GetOperationStatusResponse {
