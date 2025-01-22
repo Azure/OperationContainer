@@ -9,5 +9,5 @@
 package restsdk
 
 type OperationContainerGetOperationStatusResponse struct {
-	GoalState *OperationContainerGoalState `json:"goalState,omitempty"`
+	Status *OperationContainerStatus `json:"status,omitempty"`
 }

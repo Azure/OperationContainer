@@ -31,7 +31,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -62,7 +62,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/rpcStatus"
+              "$ref": "#/definitions/googlerpcStatus"
             }
           }
         },
@@ -146,12 +146,12 @@
     "OperationContainerGetOperationStatusResponse": {
       "type": "object",
       "properties": {
-        "goalState": {
-          "$ref": "#/definitions/OperationContainerGoalState"
+        "status": {
+          "$ref": "#/definitions/OperationContainerStatus"
         }
       }
     },
-    "OperationContainerGoalState": {
+    "OperationContainerStatus": {
       "type": "string",
       "enum": [
         "UNKNOWN",
@@ -166,21 +166,12 @@
     "OperationContainerUpdateOperationStatusBody": {
       "type": "object",
       "properties": {
-        "goalState": {
-          "$ref": "#/definitions/OperationContainerGoalState"
+        "status": {
+          "$ref": "#/definitions/OperationContainerStatus"
         }
       }
     },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
+    "googlerpcStatus": {
       "type": "object",
       "properties": {
         "code": {
@@ -198,6 +189,15 @@
           }
         }
       }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
     }
   }
 }

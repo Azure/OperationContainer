@@ -27,11 +27,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [GooglerpcStatus](docs/GooglerpcStatus.md)
  - [OperationContainerCreateOperationStatusBody](docs/OperationContainerCreateOperationStatusBody.md)
  - [OperationContainerGetOperationStatusResponse](docs/OperationContainerGetOperationStatusResponse.md)
- - [OperationContainerGoalState](docs/OperationContainerGoalState.md)
+ - [OperationContainerStatus](docs/OperationContainerStatus.md)
  - [OperationContainerUpdateOperationStatusBody](docs/OperationContainerUpdateOperationStatusBody.md)
- - [RpcStatus](docs/RpcStatus.md)
 
 ## Documentation For Authorization
  Endpoints do not require authorization.

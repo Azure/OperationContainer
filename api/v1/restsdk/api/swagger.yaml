@@ -34,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/rpcStatus'
+                $ref: '#/components/schemas/googlerpcStatus'
     put:
       tags:
       - OperationContainer
@@ -68,7 +68,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/rpcStatus'
+                $ref: '#/components/schemas/googlerpcStatus'
       x-codegen-request-body-name: body
     post:
       tags:
@@ -103,7 +103,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/rpcStatus'
+                $ref: '#/components/schemas/googlerpcStatus'
       x-codegen-request-body-name: body
 components:
   schemas:
@@ -120,11 +120,11 @@ components:
     OperationContainerGetOperationStatusResponse:
       type: object
       properties:
-        goalState:
-          $ref: '#/components/schemas/OperationContainerGoalState'
+        status:
+          $ref: '#/components/schemas/OperationContainerStatus'
       example:
-        goalState: UNKNOWN
-    OperationContainerGoalState:
+        status: UNKNOWN
+    OperationContainerStatus:
       type: string
       default: UNKNOWN
       enum:
@@ -137,17 +137,9 @@ components:
     OperationContainerUpdateOperationStatusBody:
       type: object
       properties:
-        goalState:
-          $ref: '#/components/schemas/OperationContainerGoalState'
-    protobufAny:
-      type: object
-      properties:
-        '@type':
-          type: string
-      additionalProperties:
-        type: object
-      x-schema-name: protobufAny
-    rpcStatus:
+        status:
+          $ref: '#/components/schemas/OperationContainerStatus'
+    googlerpcStatus:
       type: object
       properties:
         code:
@@ -159,4 +151,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/protobufAny'
+    protobufAny:
+      type: object
+      properties:
+        '@type':
+          type: string
+      additionalProperties:
+        type: object
+      x-schema-name: protobufAny
 x-original-swagger-version: "2.0"
