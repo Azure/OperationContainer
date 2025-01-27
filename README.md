@@ -1,3 +1,3 @@
-# Repository setup required :wave:
+# OperationContainer
     
-Please visit the website URL :point_right: for this repository to complete the setup of this repository and configure access controls.
+The OperationContainer is the api that defines the functions required to run CRUD operations in any async or longrunning operations in your system. The api is already generated in go, and mocks are available for use in testing.
