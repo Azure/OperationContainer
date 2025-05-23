@@ -77,7 +77,7 @@ enum Status {
   UNKNOWN = 0; // Use when the status of the operation is not known.
   PENDING = 1; // Use when an operation has been scheduled and is waiting to be picked up and processed.
   IN_PROGRESS = 2; // Use when an operation has been picked up by a processor and is being processed.
-  COMPLETED = 3; // Use when an operation has run successfully.
+  SUCCEEDED = 3; // Use when an operation has run successfully.
   FAILED = 4; // Use when an operation had a catastrophic failure and can't be completed.
-  CANCELLED = 5; // Use when an operation was intentionally stopped before completion.
+  CANCELED = 5; // Use when an operation was intentionally stopped before completion.
 }

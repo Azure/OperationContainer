@@ -157,11 +157,12 @@
         "UNKNOWN",
         "PENDING",
         "IN_PROGRESS",
-        "COMPLETED",
+        "SUCCEEDED",
         "FAILED",
-        "CANCELLED"
+        "CANCELED"
       ],
-      "default": "UNKNOWN"
+      "default": "UNKNOWN",
+      "description": " - UNKNOWN: Use when the status of the operation is not known.\n - PENDING: Use when an operation has been scheduled and is waiting to be picked up and processed.\n - IN_PROGRESS: Use when an operation has been picked up by a processor and is being processed.\n - SUCCEEDED: Use when an operation has run successfully.\n - FAILED: Use when an operation had a catastrophic failure and can't be completed.\n - CANCELED: Use when an operation was intentionally stopped before completion."
     },
     "OperationContainerUpdateOperationStatusBody": {
       "type": "object",
