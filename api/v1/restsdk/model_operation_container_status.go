@@ -8,6 +8,7 @@
  */
 package restsdk
 
+// OperationContainerStatus :  - UNKNOWN: Use when the status of the operation is not known.  - PENDING: Use when an operation has been scheduled and is waiting to be picked up and processed.  - IN_PROGRESS: Use when an operation has been picked up by a processor and is being processed.  - SUCCEEDED: Use when an operation has run successfully.  - FAILED: Use when an operation had a catastrophic failure and can't be completed.  - CANCELED: Use when an operation was intentionally stopped before completion.
 type OperationContainerStatus string
 
 // List of OperationContainerStatus
@@ -15,7 +16,7 @@ const (
 	UNKNOWN_OperationContainerStatus     OperationContainerStatus = "UNKNOWN"
 	PENDING_OperationContainerStatus     OperationContainerStatus = "PENDING"
 	IN_PROGRESS_OperationContainerStatus OperationContainerStatus = "IN_PROGRESS"
-	COMPLETED_OperationContainerStatus   OperationContainerStatus = "COMPLETED"
+	SUCCEEDED_OperationContainerStatus   OperationContainerStatus = "SUCCEEDED"
 	FAILED_OperationContainerStatus      OperationContainerStatus = "FAILED"
-	CANCELLED_OperationContainerStatus   OperationContainerStatus = "CANCELLED"
+	CANCELED_OperationContainerStatus    OperationContainerStatus = "CANCELED"
 )
